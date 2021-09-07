@@ -4,7 +4,7 @@ Github: https://github.com/Tris1702
 Gmail: phuonghoand2001@gmail.com
 Thank you so much!
 """
-#543212345 => 543154322
+
 T = int(input())
 for t in range(T):
     s = list(str(i) for i in input())
