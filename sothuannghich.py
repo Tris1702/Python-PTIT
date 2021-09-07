@@ -5,8 +5,7 @@ Gmail: phuonghoand2001@gmail.com
 Thank you so much!
 """
 
-palindrome = []
-arr = [0]
+palindrome = [0]
 
 def calculate(s):
     sum = 0
@@ -26,18 +25,21 @@ def prepare(s):
     prepare('0'+s+'0')
     prepare('1'+s+'1')
 
-def BS(l, r, x):
+def BS(l, r, x): #BS return index of element >= x
     while l <= r:
         mid = (l+r)//2
-        if arr[mid] < x:
+        if palindrome[mid] == x: return mid
+        if palindrome[mid] < x:
             l = mid+1
-        elif arr[mid]>x:
-            r = mid-1
         else:
-            return mid
-    return -1
+            res = mid
+            r = mid - 1
+    return res
 
-l, r, n = map(int, input().split())
+l, r, n = input().split()
+l = int(l)
+r = int(r)
+n = int(n)
 
 if n==3:
     res = 0
@@ -62,18 +64,7 @@ if n == 2:
     prepare('1')
     prepare('0')
     palindrome.sort()
-    palindrome.append(0)
-    for i in range(0, len(palindrome)-1):
-        if palindrome[i] != palindrome[i+1]:
-            arr.append(palindrome[i])
-    offset = 0
-    if BS(0, len(arr)-1, l) == -1:
-        arr.append(l)
-        offset = offset + 1
-    if BS(0, len(arr)-1, r) == -1:
-        arr.append(r)
-        offset = offset + 1
-    arr.sort()
-    it1 = BS(0, len(arr)-1, l)
-    it2 = BS(0, len(arr)-1, r)
-    print(it2 - it1 + 1 - offset)
+    it1 = BS(0, len(palindrome)-1, l)
+    it2 = BS(0, len(palindrome)-1, r)
+    if palindrome[it2]!=r: it2 -= 1
+    print(it2 - it1 + 1)
